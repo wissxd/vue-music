@@ -1,6 +1,7 @@
 <template>
   <div class="singer">
     <listview :data="singers"></listview>
+    <router-view></router-view>
   </div>
 </template>
 <script type="text/ecmascript-6">
