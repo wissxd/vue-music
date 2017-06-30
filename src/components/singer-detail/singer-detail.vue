@@ -4,7 +4,36 @@
   </transition>
 </template>
 <script type="text/ecmascript-6">
+  import {mapGetters} from 'vuex'
 
+  export default {
+    data () {
+      return {
+        songs: []
+      }
+    }
+    computed: {
+      ...mapGetters([
+        'singer'
+      ])
+    },
+    created() {
+      this._getDetail()
+    },
+    methods: {
+      _getDetail() {
+        if (!this.singer.id) {
+          this.$router.push('/singer')
+          return
+        }
+        getSingerDetail(this.singer.id).then((res) => {
+          if (res.code === ERR_OK) {
+            console.log(res.data.list)
+          }
+        })
+      }
+    }
+  }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
   @import "~common/stylus/variable"
